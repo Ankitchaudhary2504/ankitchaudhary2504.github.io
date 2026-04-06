@@ -20,6 +20,10 @@
 
 <body>
 
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" data-cursor-dot></div>
+  <div class="cursor-outline" data-cursor-outline></div>
+
   <!-- Animated Background Orbs -->
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
@@ -36,6 +40,12 @@
       <div class="profile-avatar">AC</div>
       <h1>Ankit Chaudhary</h1>
       <div class="subtitle" id="typing-text"></div>
+      
+      <div class="profile-actions">
+        <a href="#" class="btn-primary" download>
+          <i class="fas fa-download"></i> Download Resume
+        </a>
+      </div>
     </header>
 
     <!-- Skills Marquee -->
@@ -59,6 +69,22 @@
         <span><i class="fa-brands fa-figma"></i> Figma</span>
       </div>
     </div>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="stat-card">
+        <h3 class="stat-number" data-target="2">0</h3>
+        <p class="stat-label">Published Apps</p>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-number" data-target="1000">0</h3><span style="font-size: 2rem; font-weight:700; color:var(--text-primary);">+</span>
+        <p class="stat-label">Downloads</p>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-number" data-target="5">0</h3><span style="font-size: 2rem; font-weight:700; color:var(--text-primary);">.0</span>
+        <p class="stat-label">Star Ratings</p>
+      </div>
+    </section>
 
     <!-- Apps Section -->
     <main>
@@ -102,6 +128,46 @@
 
       </div>
     </main>
+
+    <!-- Experience Timeline -->
+    <section class="timeline-section">
+      <h2 class="apps-header">Milestones</h2>
+      <div class="timeline">
+        <div class="timeline-item hidden">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>Kiddo Learn Launched</h3>
+            <p>Released an engaging educational app successfully hitting milestones on Play Store.</p>
+          </div>
+        </div>
+        <div class="timeline-item hidden">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>Photo Billing App</h3>
+            <p>Launched digital Udhar Khata application optimizing workflow for smart store owners.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-section">
+      <h2 class="apps-header">Get In Touch</h2>
+      <form class="glass-form" action="mailto:ankitch2504@gmail.com" method="post" enctype="text/plain">
+        <div class="input-group">
+          <input type="text" name="Name" required placeholder="Your Name">
+        </div>
+        <div class="input-group">
+          <input type="email" name="Email" required placeholder="Your Email">
+        </div>
+        <div class="input-group">
+          <textarea name="Message" rows="4" required placeholder="Your Message"></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%;">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+      </form>
+    </section>
 
     <!-- Footer -->
     <footer>
