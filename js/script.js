@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cursorDot && cursorOutline) {
             cursorDot.style.left = `${x}px`;
             cursorDot.style.top = `${y}px`;
-            
+
             // Add a tiny delay to the outline for that smooth effect
             cursorOutline.animate({
                 left: `${x}px`,
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Move background orbs slightly opposite to mouse movement (parallax)
         const xOrb = x / window.innerWidth;
         const yOrb = y / window.innerHeight;
-        
+
         const orb1 = document.querySelector('.orb-1');
         const orb2 = document.querySelector('.orb-2');
 
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const target = +stat.getAttribute('data-target');
                     const duration = 2000; // 2 seconds
                     const increment = target / (duration / 16); // 60fps
-                    
+
                     let current = 0;
                     const updateCounter = () => {
                         current += increment;
