@@ -151,4 +151,127 @@ document.addEventListener('DOMContentLoaded', () => {
     if (statsSection) {
         statsObserver.observe(statsSection);
     }
+
+    // 5. Terminal Typing Animation
+    const terminalLines = [
+        "> flutter run --release",
+        "> Building for Android and iOS...",
+        "> Compiling Dart bridging...",
+        "> Build complete in 12.4s.",
+        "> App successfully published! 🚀"
+    ];
+    const terminalText = document.getElementById('terminal-text');
+    if (terminalText) {
+        let lineIdx = 0;
+        let charIdx = 0;
+        
+        function typeTerminal() {
+            if (lineIdx < terminalLines.length) {
+                if (charIdx < terminalLines[lineIdx].length) {
+                    // Start of new line
+                    if (charIdx === 0 && lineIdx !== 0) {
+                        terminalText.innerHTML = terminalText.innerHTML.replace('<span class="typed-cursor">_</span>', '') + '<br>';
+                    } else if (charIdx === 0 && lineIdx === 0) {
+                        terminalText.innerHTML = '';
+                    }
+                    
+                    let currText = terminalText.innerHTML.replace('<span class="typed-cursor">_</span>', '');
+                    terminalText.innerHTML = currText + terminalLines[lineIdx].charAt(charIdx) + '<span class="typed-cursor">_</span>';
+                    
+                    charIdx++;
+                    setTimeout(typeTerminal, 50 + Math.random() * 50); // randomize typing speed
+                } else {
+                    // Line done -> move to next line after a pause
+                    lineIdx++;
+                    charIdx = 0;
+                    setTimeout(typeTerminal, 800);
+                }
+            } else {
+                // Loop terminal animation
+                setTimeout(() => {
+                    lineIdx = 0;
+                    charIdx = 0;
+                    typeTerminal();
+                }, 3000);
+            }
+        }
+        setTimeout(typeTerminal, 1500);
+    }
+
+    // 6. Skill Rings Animation Intersection Observer
+    const skillRings = document.querySelectorAll('.skill-ring');
+    const ringObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const ring = entry.target;
+                const progressCircle = ring.querySelector('.ring-progress');
+                const percentText = ring.querySelector('.percent');
+                const targetPercent = +ring.getAttribute('data-percent');
+                
+                // Animate circle stroke
+                const circumference = 283;
+                const offset = circumference - (targetPercent / 100) * circumference;
+                progressCircle.style.strokeDashoffset = offset;
+                
+                // Animate text
+                let currentProg = 0;
+                const dur = 2000;
+                const inc = targetPercent / (dur / 16);
+                const updateProg = () => {
+                    currentProg += inc;
+                    if (currentProg < targetPercent) {
+                        percentText.innerText = Math.ceil(currentProg) + '%';
+                        requestAnimationFrame(updateProg);
+                    } else {
+                        percentText.innerText = targetPercent + '%';
+                    }
+                };
+                updateProg();
+
+                ringObserver.unobserve(ring);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    skillRings.forEach(ring => ringObserver.observe(ring));
+});
+
+// Global Window Handlers
+window.addEventListener('load', () => {
+    // Hide Preloader
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        setTimeout(() => {
+            preloader.style.opacity = '0';
+            preloader.style.visibility = 'hidden';
+        }, 800); // minimum 800ms to show the cool logo animation
+    }
+
+    // Init tsParticles
+    if (typeof tsParticles !== 'undefined') {
+        tsParticles.load("tsparticles", {
+            background: {
+                color: { value: "transparent" },
+            },
+            fpsLimit: 60,
+            interactivity: {
+                events: {
+                    onHover: { enable: true, mode: "grab" },
+                },
+                modes: {
+                    grab: { distance: 200, links: { opacity: 0.5 } }
+                },
+            },
+            particles: {
+                color: { value: ["#38bdf8", "#818cf8"] },
+                links: { color: "#ffffff", distance: 150, enable: true, opacity: 0.1, width: 1 },
+                move: { direction: "none", enable: true, outModes: { default: "bounce" }, random: false, speed: 1, straight: false },
+                number: { density: { enable: true, area: 800 }, value: 60 },
+                opacity: { value: 0.3 },
+                shape: { type: "circle" },
+                size: { value: { min: 1, max: 3 } },
+            },
+            detectRetina: true,
+        });
+    }
 });

@@ -20,13 +20,17 @@
 
 <body>
 
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader-logo">AC</div>
+  </div>
+
   <!-- Custom Cursor -->
   <div class="cursor-dot" data-cursor-dot></div>
   <div class="cursor-outline" data-cursor-outline></div>
 
-  <!-- Animated Background Orbs -->
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
+  <!-- Particle Background Container -->
+  <div id="tsparticles"></div>
 
   <!-- Theme Toggle Button -->
   <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
@@ -40,6 +44,15 @@
       <div class="profile-avatar">AC</div>
       <h1>Ankit Chaudhary</h1>
       <div class="subtitle" id="typing-text"></div>
+
+      <!-- Animated Terminal -->
+      <div class="terminal-container">
+        <div class="terminal-header">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <div class="terminal-title">bash -- ~</div>
+        </div>
+        <div class="terminal-body" id="terminal-text"></div>
+      </div>
     </header>
 
     <!-- Skills Marquee -->
@@ -63,6 +76,46 @@
         <span><i class="fa-brands fa-figma"></i> Figma</span>
       </div>
     </div>
+
+    <!-- Skill Rings -->
+    <section class="skills-rings-section">
+      <h2 class="apps-header">Expertise</h2>
+      <div class="rings-grid">
+        <div class="skill-ring" data-percent="95">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" class="ring-bg"></circle>
+            <circle cx="50" cy="50" r="45" class="ring-progress"></circle>
+          </svg>
+          <div class="ring-content">
+            <i class="fa-brands fa-flutter" style="color: #38bdf8;"></i>
+            <span class="percent">0%</span>
+          </div>
+          <p>Flutter</p>
+        </div>
+        <div class="skill-ring" data-percent="85">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" class="ring-bg"></circle>
+            <circle cx="50" cy="50" r="45" class="ring-progress"></circle>
+          </svg>
+          <div class="ring-content">
+            <i class="fa-solid fa-fire" style="color: #f59e0b;"></i>
+            <span class="percent">0%</span>
+          </div>
+          <p>Firebase</p>
+        </div>
+        <div class="skill-ring" data-percent="90">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" class="ring-bg"></circle>
+            <circle cx="50" cy="50" r="45" class="ring-progress"></circle>
+          </svg>
+          <div class="ring-content">
+            <i class="fa-brands fa-apple" style="color: #cbd5e1;"></i>
+            <span class="percent">0%</span>
+          </div>
+          <p>Native Mobile</p>
+        </div>
+      </div>
+    </section>
 
     <!-- Stats Section -->
     <section class="stats-section">
@@ -146,6 +199,30 @@
       </div>
     </section>
 
+    <!-- Testimonial Carousel -->
+    <section class="testimonial-section">
+      <h2 class="apps-header">User Feedback</h2>
+      <div class="carousel-container">
+        <div class="carousel-track">
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"Kiddo Learn is absolutely amazing! My kids love it, and the UI is incredibly smooth."</p>
+            <h4>- Sarah M.</h4>
+          </div>
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"Photo Billing app completely digitized my Udhar Khata. Fast, reliable, and zero bugs."</p>
+            <h4>- Rajesh K.</h4>
+          </div>
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"Ankit is a brilliant developer. His apps are top-tier and perform flawlessly."</p>
+            <h4>- Tech Reviewer</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Contact Form -->
     <section class="contact-section">
       <h2 class="apps-header">Get In Touch</h2>
@@ -179,6 +256,7 @@
   </div>
 
   <!-- Interactive Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
   <script src="js/script.js"></script>
 </body>
