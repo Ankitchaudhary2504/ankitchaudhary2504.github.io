@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (terminalText) {
         let lineIdx = 0;
         let charIdx = 0;
-        
+
         function typeTerminal() {
             if (lineIdx < terminalLines.length) {
                 if (charIdx < terminalLines[lineIdx].length) {
@@ -174,10 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (charIdx === 0 && lineIdx === 0) {
                         terminalText.innerHTML = '';
                     }
-                    
+
                     let currText = terminalText.innerHTML.replace('<span class="typed-cursor">_</span>', '');
                     terminalText.innerHTML = currText + terminalLines[lineIdx].charAt(charIdx) + '<span class="typed-cursor">_</span>';
-                    
+
                     charIdx++;
                     setTimeout(typeTerminal, 50 + Math.random() * 50); // randomize typing speed
                 } else {
@@ -207,12 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const progressCircle = ring.querySelector('.ring-progress');
                 const percentText = ring.querySelector('.percent');
                 const targetPercent = +ring.getAttribute('data-percent');
-                
+
                 // Animate circle stroke
                 const circumference = 283;
                 const offset = circumference - (targetPercent / 100) * circumference;
                 progressCircle.style.strokeDashoffset = offset;
-                
+
                 // Animate text
                 let currentProg = 0;
                 const dur = 2000;
