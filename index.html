@@ -21,6 +21,11 @@
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
 
+  <!-- Theme Toggle Button -->
+  <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+    <i class="fas fa-moon"></i>
+  </button>
+
   <div class="container">
     
     <!-- Header / Profile -->
@@ -30,6 +35,28 @@
       <div class="subtitle" id="typing-text"></div>
     </header>
 
+    <!-- Skills Marquee -->
+    <div class="skills-marquee">
+      <div class="marquee-content">
+        <!-- Duplicate elements for seamless loop -->
+        <span><i class="fa-brands fa-flutter"></i> Flutter</span>
+        <span><i class="fa-brands fa-android"></i> Android</span>
+        <span><i class="fa-brands fa-apple"></i> iOS</span>
+        <span><i class="fa-solid fa-fire"></i> Firebase</span>
+        <span><i class="fa-solid fa-code"></i> Dart</span>
+        <span><i class="fa-solid fa-database"></i> Supabase</span>
+        <span><i class="fa-brands fa-figma"></i> Figma</span>
+        
+        <span><i class="fa-brands fa-flutter"></i> Flutter</span>
+        <span><i class="fa-brands fa-android"></i> Android</span>
+        <span><i class="fa-brands fa-apple"></i> iOS</span>
+        <span><i class="fa-solid fa-fire"></i> Firebase</span>
+        <span><i class="fa-solid fa-code"></i> Dart</span>
+        <span><i class="fa-solid fa-database"></i> Supabase</span>
+        <span><i class="fa-brands fa-figma"></i> Figma</span>
+      </div>
+    </div>
+
     <!-- Apps Section -->
     <main>
       <h2 class="apps-header">Featured Applications</h2>
@@ -37,7 +64,7 @@
       <div class="apps-grid">
         
         <!-- Kiddo Learn Card -->
-        <a href="https://play.google.com/store/apps/details?id=com.ankit.kiddolearn" target="_blank" rel="noopener noreferrer" class="app-card" id="app-kiddolearn">
+        <a href="https://play.google.com/store/apps/details?id=com.ankit.kiddolearn" target="_blank" rel="noopener noreferrer" class="app-card" id="app-kiddolearn" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
           <img src="https://play-lh.googleusercontent.com/pgzWCAvZx-jCEFymCcDiYZsUCB-sgOreeeN84h4Ykisx4ZANVHgTel6ecTNtr2L6txqkqiGSuZbxzSP2GJEw" alt="Kiddo Learn Icon" class="app-icon">
           <h3 class="app-title">Kiddo Learn</h3>
           <p class="app-desc">
@@ -49,7 +76,7 @@
         </a>
 
         <!-- Photo Billing App Card -->
-        <a href="https://play.google.com/store/apps/details?id=com.ankit.photobilling" target="_blank" rel="noopener noreferrer" class="app-card" id="app-photobilling">
+        <a href="https://play.google.com/store/apps/details?id=com.ankit.photobilling" target="_blank" rel="noopener noreferrer" class="app-card" id="app-photobilling" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
           <img src="https://play-lh.googleusercontent.com/NH3qhybeXgcSfmN_d2BgjAfMzQxRa7SCyKQZYlUQM7_fRFUF1259o74LCvXupEwRL6HwSOJySPG6iA62TkJ4IA" alt="Photo Billing App Icon" class="app-icon">
           <h3 class="app-title">Photo Billing App</h3>
           <p class="app-desc">
@@ -65,12 +92,19 @@
 
     <!-- Footer -->
     <footer>
-      <p>&copy; 2026 Ankit Chaudhary &bull; Crafted with precision.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="mailto:hello@ankit.com" class="social-link" title="Email Me"><i class="fas fa-envelope"></i></a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Ankit Chaudhary &bull; Crafted with precision.</p>
     </footer>
 
   </div>
 
   <!-- Interactive Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>

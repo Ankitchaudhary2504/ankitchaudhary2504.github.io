@@ -1,5 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // 0. Theme Toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = themeToggleBtn.querySelector('i');
+    
+    // Check local storage for saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('light-theme');
+        const isLight = document.body.classList.contains('light-theme');
+        
+        // Switch Icon and save preference
+        if (isLight) {
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+            localStorage.setItem('theme', 'light');
+        } else {
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+            localStorage.setItem('theme', 'dark');
+        }
+    });
     // 1. Typing Effect for Subtitle
     const subtitleElement = document.getElementById('typing-text');
     const textToType = 'Mobile App Developer';

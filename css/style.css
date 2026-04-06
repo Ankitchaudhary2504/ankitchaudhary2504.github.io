@@ -29,6 +29,53 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.light-theme {
+  --bg-color: #f8fafc;
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent-color: #4f46e5;
+  --accent-glow: rgba(79, 70, 229, 0.2);
+}
+
+body.light-theme .app-card::before {
+  background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
+}
+
+body.light-theme h1 {
+  background: linear-gradient(to right, #0f172a, #334155);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Theme Toggle */
+.theme-toggle-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: 0.3s;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Background animated orbs */
@@ -112,6 +159,7 @@ h1 {
   margin-bottom: 10px;
   background: linear-gradient(to right, #fff, #cbd5e1);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -120,6 +168,63 @@ h1 {
   color: var(--text-secondary);
   font-weight: 300;
   min-height: 30px; /* For typing effect */
+}
+
+/* Skills Marquee */
+.skills-marquee {
+  width: 100%;
+  overflow: hidden;
+  background: var(--glass-bg);
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 15px 0;
+  margin-bottom: 50px;
+  display: flex;
+  white-space: nowrap;
+  position: relative;
+}
+
+.skills-marquee::before,
+.skills-marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  z-index: 2;
+}
+.skills-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-color), transparent);
+}
+.skills-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-color), transparent);
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-content span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 30px;
+  opacity: 0.85;
+}
+
+.marquee-content span i {
+  color: var(--gradient-1);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } 
 }
 
 /* Apps Grid */
@@ -251,9 +356,43 @@ h1 {
 footer {
   margin-top: 60px;
   text-align: center;
+  padding: 30px 0;
+}
+
+.footer-socials {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 1.3rem;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.social-link:hover {
+  transform: translateY(-5px) scale(1.1);
+  color: #fff;
+  background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+  border-color: transparent;
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+.footer-copy {
   color: var(--text-secondary);
   font-size: 0.9rem;
-  padding: 20px 0;
   opacity: 0.6;
 }
 
