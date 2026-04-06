@@ -907,6 +907,63 @@ body.light-theme .skill-ring:nth-child(3) i {
   }
 }
 
+/* Kiddo Learn Universe CSS */
+.kiddo-universe-section {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.kiddo-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+}
+
+.kiddo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.kiddo-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  width: 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: kiddo-float 4s ease-in-out infinite alternate;
+  animation-delay: var(--delay, 0s);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kiddo-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2);
+  z-index: 10;
+}
+
+.kiddo-img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 12px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+}
+
+@keyframes kiddo-float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+  100% { transform: translateY(5px) rotate(-2deg); }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   h1 {
