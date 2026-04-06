@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 0. Theme Toggle
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeIcon = themeToggleBtn.querySelector('i');
-    
+
     // Check local storage for saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggleBtn.addEventListener('click', () => {
         document.body.classList.toggle('light-theme');
         const isLight = document.body.classList.contains('light-theme');
-        
+
         // Switch Icon and save preference
         if (isLight) {
             themeIcon.classList.replace('fa-moon', 'fa-sun');
