@@ -93,6 +93,9 @@
   <div class="cursor-dot" data-cursor-dot></div>
   <div class="cursor-outline" data-cursor-outline></div>
 
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
   <!-- Particle Background Container -->
   <div id="tsparticles"></div>
 
@@ -211,7 +214,7 @@
           data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
           <img
             src="https://play-lh.googleusercontent.com/pgzWCAvZx-jCEFymCcDiYZsUCB-sgOreeeN84h4Ykisx4ZANVHgTel6ecTNtr2L6txqkqiGSuZbxzSP2GJEw"
-            alt="Kiddo Learn Icon" class="app-icon">
+            alt="Kiddo Learn Icon" class="app-icon" fetchpriority="high">
           <h3 class="app-title">Kiddo Learn</h3>
           <p class="app-desc">
             A vibrant and interactive educational app designed to help kids learn effortlessly through engaging
@@ -228,7 +231,7 @@
           data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
           <img
             src="https://play-lh.googleusercontent.com/NH3qhybeXgcSfmN_d2BgjAfMzQxRa7SCyKQZYlUQM7_fRFUF1259o74LCvXupEwRL6HwSOJySPG6iA62TkJ4IA"
-            alt="Photo Billing App Icon" class="app-icon">
+            alt="Photo Billing App Icon" class="app-icon" loading="lazy">
           <h3 class="app-title">Photo Billing App</h3>
           <p class="app-desc">
             Instantly capture and organize customer bills using your phone's camera. The perfect Udhar Khata digitizer
@@ -251,22 +254,20 @@
       <p class="kiddo-subtitle">Meet the fun characters making learning effortless!</p>
 
       <div class="kiddo-grid">
-        <!-- <div class="kiddo-card" style="--delay: 0s;">
-          <img src="assets/images/kiddolearn/bear.jpg" alt="Learn Bear" class="kiddo-img" data-tilt data-tilt-max="15">
-        </div> -->
-        <div class="kiddo-card" style="--delay: 0.5s;">
-          <img src="assets/images/kiddolearn/dog.jpg" alt="Smart Dog" class="kiddo-img" data-tilt data-tilt-max="15">
+        <div class="kiddo-card" style="--delay: 0s;">
+          <img src="assets/images/kiddolearn/bear.jpg" alt="Learn Bear" class="kiddo-img" loading="lazy">
         </div>
-        <div class="kiddo-card" style="--delay: 1s;">
-          <img src="assets/images/kiddolearn/elephant.jpg" alt="Colorful Elephant" class="kiddo-img" data-tilt
-            data-tilt-max="15">
+        <div class="kiddo-card" style="--delay: 0.2s;">
+          <img src="assets/images/kiddolearn/dog.jpg" alt="Smart Dog" class="kiddo-img" loading="lazy">
         </div>
-        <div class="kiddo-card" style="--delay: 1.5s;">
-          <img src="assets/images/kiddolearn/tiger.jpg" alt="Cute Tiger" class="kiddo-img" data-tilt data-tilt-max="15">
+        <div class="kiddo-card" style="--delay: 0.4s;">
+          <img src="assets/images/kiddolearn/elephant.jpg" alt="Colorful Elephant" class="kiddo-img" loading="lazy">
         </div>
-        <div class="kiddo-card" style="--delay: 2.0s;">
-          <img src="assets/images/kiddolearn/monkey.jpg" alt="Clever Monkey" class="kiddo-img" data-tilt
-            data-tilt-max="15">
+        <div class="kiddo-card" style="--delay: 0.6s;">
+          <img src="assets/images/kiddolearn/tiger.jpg" alt="Cute Tiger" class="kiddo-img" loading="lazy">
+        </div>
+        <div class="kiddo-card" style="--delay: 0.8s;">
+          <img src="assets/images/kiddolearn/monkey.jpg" alt="Clever Monkey" class="kiddo-img" loading="lazy">
         </div>
       </div>
     </section>
@@ -321,13 +322,16 @@
       <h2 class="apps-header">Get In Touch</h2>
       <form class="glass-form" action="mailto:ankitch2504@gmail.com" method="post" enctype="text/plain">
         <div class="input-group">
-          <input type="text" name="Name" required placeholder="Your Name">
+          <input type="text" name="Name" id="contact-name" required placeholder=" ">
+          <label for="contact-name">Your Name</label>
         </div>
         <div class="input-group">
-          <input type="email" name="Email" required placeholder="Your Email">
+          <input type="email" name="Email" id="contact-email" required placeholder=" ">
+          <label for="contact-email">Your Email</label>
         </div>
         <div class="input-group">
-          <textarea name="Message" rows="4" required placeholder="Your Message"></textarea>
+          <textarea name="Message" id="contact-message" rows="4" required placeholder=" "></textarea>
+          <label for="contact-message">Your Message</label>
         </div>
         <button type="submit" class="btn-primary" style="width: 100%;">
           <i class="fas fa-paper-plane"></i> Send Message

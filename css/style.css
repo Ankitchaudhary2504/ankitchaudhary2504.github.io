@@ -12,6 +12,53 @@
   --gradient-2: #818cf8;
 }
 
+html {
+  scrollbar-color: var(--gradient-2) var(--bg-color);
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
+/* View Transitions API Custom Circular Wipe */
+::view-transition-group(root) {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+::view-transition-new(root) {
+  clip-path: circle(0% at var(--click-x, 50%) var(--click-y, 50%));
+  animation-name: reveal-theme;
+}
+::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+@keyframes reveal-theme {
+  to {
+    clip-path: circle(150% at var(--click-x, 50%) var(--click-y, 50%));
+  }
+}
+
+/* Scroll Progress Bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, var(--gradient-1), var(--gradient-2));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 10001;
+}
+@supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+  .scroll-progress {
+    animation: grow-progress auto linear both;
+    animation-timeline: scroll(root);
+  }
+}
+@keyframes grow-progress {
+  to { transform: scaleX(1); }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -30,13 +77,16 @@ body {
   align-items: center;
   justify-content: center;
   transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.cursor-enabled {
   cursor: none;
 }
 
-a,
-button,
-input,
-textarea {
+body.cursor-enabled a,
+body.cursor-enabled button,
+body.cursor-enabled input,
+body.cursor-enabled textarea {
   cursor: none;
 }
 
@@ -267,9 +317,84 @@ h1 {
 }
 
 /* App Card - Glassmorphism */
+/* Spotlight Card Base Styles */
+.app-card,
+.stat-card,
+.review-card,
+.kiddo-card {
+  background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+              radial-gradient(
+                300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(99, 102, 241, 0.25),
+                var(--glass-border) 60%
+              ) border-box !important;
+  border: 1px solid transparent !important;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+body.light-theme .app-card,
+body.light-theme .stat-card,
+body.light-theme .review-card,
+body.light-theme .kiddo-card {
+  background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+              radial-gradient(
+                300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(79, 70, 229, 0.15),
+                var(--glass-border) 60%
+              ) border-box !important;
+}
+
+.app-card::after,
+.stat-card::after,
+.review-card::after,
+.kiddo-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(99, 102, 241, 0.08),
+    transparent 50%
+  );
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+body.light-theme .app-card::after,
+body.light-theme .stat-card::after,
+body.light-theme .review-card::after,
+body.light-theme .kiddo-card::after {
+  background: radial-gradient(
+    300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(79, 70, 229, 0.05),
+    transparent 50%
+  );
+}
+
+.app-card:hover::after,
+.stat-card:hover::after,
+.review-card:hover::after,
+.kiddo-card:hover::after {
+  opacity: 1;
+}
+
+/* Ensure card contents sit above spotlight overlay */
+.app-card *,
+.stat-card *,
+.review-card *,
+.kiddo-card * {
+  position: relative;
+  z-index: 2;
+}
+
+/* App Card - Glassmorphism */
 .app-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
   border-radius: 24px;
   padding: 30px;
   display: flex;
@@ -277,11 +402,6 @@ h1 {
   align-items: center;
   text-decoration: none;
   color: var(--text-primary);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  position: relative;
-  overflow: hidden;
   opacity: 0;
   transform: translateY(30px);
 }
@@ -304,8 +424,6 @@ h1 {
 
 .app-card:hover {
   transform: translateY(-10px) scale(1.02);
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
 }
 
@@ -479,13 +597,10 @@ footer {
 }
 
 .stat-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
   border-radius: 20px;
   padding: 20px 30px;
   text-align: center;
   min-width: 150px;
-  backdrop-filter: blur(10px);
 }
 
 .stat-number {
@@ -584,37 +699,76 @@ body.light-theme .timeline-dot {
 .glass-form {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  padding: 30px;
+  padding: 35px 30px 30px;
   border-radius: 24px;
   backdrop-filter: blur(10px);
 }
 
 .input-group {
-  margin-bottom: 20px;
+  position: relative;
+  margin-bottom: 25px;
 }
 
 .input-group input,
 .input-group textarea {
   width: 100%;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--glass-border);
+  padding: 22px 15px 8px;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid var(--glass-border) !important;
   border-radius: 12px;
   color: var(--text-primary);
   font-size: 1rem;
-  transition: 0.3s;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body.light-theme .input-group input,
 body.light-theme .input-group textarea {
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(0, 0, 0, 0.01) !important;
+}
+
+.input-group label {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left top;
+}
+
+.input-group textarea ~ label {
+  top: 25px;
+}
+
+/* Floating behavior when active or not empty */
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label,
+.input-group textarea:focus ~ label,
+.input-group textarea:not(:placeholder-shown) ~ label {
+  transform: translateY(-85%) scale(0.75);
+  color: var(--gradient-1);
 }
 
 .input-group input:focus,
 .input-group textarea:focus {
-  outline: none;
-  border-color: var(--gradient-1);
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+  border-color: var(--gradient-1) !important;
+  box-shadow: 0 0 15px var(--accent-glow) !important;
+}
+
+/* Form Validation states using :user-valid and :user-invalid */
+.input-group input:user-valid,
+.input-group textarea:user-valid {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.15) !important;
+}
+
+.input-group input:user-invalid,
+.input-group textarea:user-invalid {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.15) !important;
 }
 
 /* Preloader */
@@ -862,18 +1016,14 @@ body.light-theme .skill-ring:nth-child(3) i {
 .review-card {
   min-width: 300px;
   scroll-snap-align: center;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
   border-radius: 20px;
   padding: 30px;
-  backdrop-filter: blur(10px);
   text-align: center;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .review-card:hover {
   transform: translateY(-10px);
-  border-color: rgba(99, 102, 241, 0.5);
   box-shadow: 0 10px 30px var(--accent-glow);
 }
 
@@ -911,6 +1061,7 @@ body.light-theme .skill-ring:nth-child(3) i {
 .kiddo-universe-section {
   padding: 60px 0;
   text-align: center;
+  perspective: 1000px;
 }
 
 .kiddo-subtitle {
@@ -929,11 +1080,8 @@ body.light-theme .skill-ring:nth-child(3) i {
 }
 
 .kiddo-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
   border-radius: 24px;
   padding: 20px;
-  backdrop-filter: blur(10px);
   width: 250px;
   height: 250px;
   display: flex;
@@ -941,12 +1089,14 @@ body.light-theme .skill-ring:nth-child(3) i {
   justify-content: center;
   animation: kiddo-float 4s ease-in-out infinite alternate;
   animation-delay: var(--delay, 0s);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) translateZ(0px);
+  transition: transform 0.15s ease-out, box-shadow 0.3s ease;
 }
 
 .kiddo-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2);
+  animation-play-state: paused;
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
   z-index: 10;
 }
 
@@ -956,6 +1106,8 @@ body.light-theme .skill-ring:nth-child(3) i {
   border-radius: 12px;
   object-fit: contain;
   filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+  transform: translateZ(30px);
+  transition: transform 0.15s ease-out;
 }
 
 @keyframes kiddo-float {
@@ -986,5 +1138,113 @@ body.light-theme .skill-ring:nth-child(3) i {
 
   .container {
     padding: 30px 15px;
+  }
+}
+
+/* Scroll-Driven Animations (SDA) Rules */
+@supports ((animation-timeline: view()) and (animation-range: entry)) {
+  /* App Cards reveal on scroll */
+  .app-card {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: sda-reveal auto linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 30%;
+  }
+
+  /* Timeline Scroll Animations */
+  .timeline {
+    view-timeline: --timeline-timeline block;
+  }
+  
+  .timeline-item.hidden {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .timeline::before {
+    transform-origin: 50% 0;
+    animation: sda-grow-line auto linear both;
+    animation-timeline: --timeline-timeline;
+    animation-range: entry 10% exit 90%;
+  }
+
+  .timeline-dot {
+    animation: sda-grow-dot auto linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 50%;
+  }
+
+  .timeline-content {
+    animation: sda-reveal auto linear both;
+    animation-timeline: view();
+    animation-range: entry 15% cover 45%;
+  }
+
+  /* General section headers grow underline */
+  .apps-header {
+    position: relative;
+    animation: sda-header-fade auto linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 25%;
+  }
+}
+
+@keyframes sda-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes sda-grow-line {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes sda-grow-dot {
+  from {
+    transform: scale(0.3);
+    box-shadow: 0 0 0 0 transparent;
+    border-color: var(--gradient-2);
+  }
+  to {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px 5px var(--accent-glow);
+    border-color: var(--gradient-1);
+  }
+}
+
+@keyframes sda-header-fade {
+  from {
+    opacity: 0.3;
+    letter-spacing: 0px;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 2px;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-card,
+  .scroll-progress,
+  .timeline::before,
+  .timeline-dot,
+  .timeline-content,
+  .apps-header {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
