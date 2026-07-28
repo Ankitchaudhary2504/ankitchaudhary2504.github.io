@@ -119,6 +119,27 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     bindSpotlight();
 
+    // 4.1 Kiddo Learn Universe 3D Tilt Effect
+    const kiddoCards = document.querySelectorAll('.kiddo-card');
+    kiddoCards.forEach(card => {
+        card.style.transformStyle = 'preserve-3d';
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const width = rect.width;
+            const height = rect.height;
+            const xPercent = (e.clientX - rect.left) / width - 0.5;
+            const yPercent = (e.clientY - rect.top) / height - 0.5;
+            const rotateX = -yPercent * 25; 
+            const rotateY = xPercent * 25;  
+            card.style.setProperty('--rotate-x', `${rotateX}deg`);
+            card.style.setProperty('--rotate-y', `${rotateY}deg`);
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.setProperty('--rotate-x', '0deg');
+            card.style.setProperty('--rotate-y', '0deg');
+        });
+    });
+
     // 5. Magnetic Custom Cursor
     const cursorDot = document.querySelector('[data-cursor-dot]');
     const cursorOutline = document.querySelector('[data-cursor-outline]');
@@ -386,8 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ecommerce: {
             title: "E-Commerce Mobile Suite",
             category: "Multi-Vendor Shopping & Retail App",
-            icon: "custom-ecommerce-icon",
-            isIconFont: true,
+            icon: "assets/images/apps/ecommerce.png",
             description: "A modern, high-converting mobile e-commerce platform built with Flutter to deliver ultra-fast shopping experiences.",
             features: [
                 "Dynamic home feed with categorized banners & flash sales",
