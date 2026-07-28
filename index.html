@@ -189,8 +189,11 @@
         <a href="#contact" class="btn-primary">
           <i class="fas fa-paper-plane"></i> Let's Build Your App
         </a>
+        <button id="share-portfolio-btn" class="btn-secondary">
+          <i class="fas fa-share-nodes"></i> Share Portfolio
+        </button>
         <a href="https://github.com/Ankitchaudhary2504" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-          <i class="fab fa-github"></i> GitHub Profile
+          <i class="fab fa-github"></i> GitHub
         </a>
       </div>
 
@@ -290,6 +293,15 @@
     <main id="apps">
       <h2 class="apps-header">Featured Mobile Applications</h2>
       <p class="section-subtitle">Production-grade mobile solutions built with Flutter & modern architecture</p>
+
+      <!-- Search Input Container -->
+      <div class="search-box-container">
+        <div class="search-input-wrapper">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" id="app-search-input" placeholder="Search apps by keyword, feature, or tech stack (e.g. Flutter, Booking, OCR, Payment)...">
+          <button id="clear-search-btn" class="clear-search-btn" aria-label="Clear Search">&times;</button>
+        </div>
+      </div>
 
       <!-- Category Filter Tabs -->
       <div class="filter-bar">
@@ -701,7 +713,8 @@
         <!-- Content injected dynamically via JS -->
       </div>
     </div>
-  </div>
+  <!-- Toast Notification Container -->
+  <div id="toast" class="toast-notification" aria-live="polite"></div>
 
   <!-- Interactive Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>

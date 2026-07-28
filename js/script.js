@@ -76,33 +76,91 @@ document.addEventListener('DOMContentLoaded', () => {
 
     elementsToReveal.forEach(el => observer.observe(el));
 
-    // 3. Category Filter System
+    // Toast Notification System
+    const toastEl = document.getElementById('toast');
+    let toastTimeout;
+
+    const showToast = (message, icon = 'fa-check-circle') => {
+        if (!toastEl) return;
+        toastEl.innerHTML = `<i class="fas ${icon}" style="color:var(--gradient-1);"></i> <span>${message}</span>`;
+        toastEl.classList.add('active');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            toastEl.classList.remove('active');
+        }, 3000);
+    };
+
+    // Share Portfolio Link Handler
+    const shareBtn = document.getElementById('share-portfolio-btn');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', () => {
+            const url = window.location.href;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showToast('Portfolio link copied to clipboard!', 'fa-link');
+                }).catch(() => {
+                    showToast('Portfolio link ready: ' + url, 'fa-share-nodes');
+                });
+            } else {
+                showToast('Portfolio link: ' + url, 'fa-share-nodes');
+            }
+        });
+    }
+
+    // 3. Category Filter & Keyword Search System
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const searchInput = document.getElementById('app-search-input');
+    const clearSearchBtn = document.getElementById('clear-search-btn');
+
+    const filterApps = () => {
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        const activeFilterBtn = document.querySelector('.filter-btn.active');
+        const filterValue = activeFilterBtn ? activeFilterBtn.getAttribute('data-filter') : 'all';
+
+        if (clearSearchBtn) {
+            clearSearchBtn.style.display = query.length > 0 ? 'block' : 'none';
+        }
+
+        appCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            const cardText = card.innerText.toLowerCase();
+            const matchesCategory = (filterValue === 'all' || category === filterValue);
+            const matchesSearch = query === '' || cardText.includes(query);
+
+            if (matchesCategory && matchesSearch) {
+                card.style.display = 'flex';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0) scale(1)';
+                }, 50);
+            } else {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px) scale(0.95)';
+                setTimeout(() => {
+                    card.style.display = 'none';
+                }, 300);
+            }
+        });
+    };
+
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            const filterValue = btn.getAttribute('data-filter');
-
-            appCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                if (filterValue === 'all' || category === filterValue) {
-                    card.style.display = 'flex';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0) scale(1)';
-                    }, 50);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px) scale(0.95)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
-            });
+            filterApps();
         });
     });
+
+    if (searchInput) {
+        searchInput.addEventListener('input', filterApps);
+    }
+
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', () => {
+            if (searchInput) searchInput.value = '';
+            filterApps();
+        });
+    }
 
     // 4. Spotlight Mouse Hover Glow & 3D Tilt
     const bindSpotlight = () => {
