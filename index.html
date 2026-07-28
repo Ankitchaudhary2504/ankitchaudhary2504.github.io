@@ -15,6 +15,13 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://ankitchaudhary2504.github.io/">
 
+  <!-- PWA & Mobile Web App Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0b0f19">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ankitchaudhary2504.github.io/">
@@ -43,7 +50,9 @@
     "email": "ankitch2504@gmail.com",
     "jobTitle": "Senior Flutter & Mobile App Architect",
     "knowsAbout": ["Flutter", "Dart", "Firebase", "Supabase", "Android", "iOS", "REST APIs", "State Management", "Mobile App Architecture"],
-    "sameAs": [],
+    "sameAs": [
+      "https://github.com/Ankitchaudhary2504"
+    ],
     "worksFor": {
       "@type": "Organization",
       "name": "Freelance / Senior Mobile App Developer"
@@ -174,6 +183,16 @@
       <div class="profile-avatar">AC</div>
       <h1>Ankit Chaudhary</h1>
       <div class="subtitle" id="typing-text"></div>
+
+      <!-- Quick Action Buttons -->
+      <div class="profile-cta-group">
+        <a href="#contact" class="btn-primary">
+          <i class="fas fa-paper-plane"></i> Let's Build Your App
+        </a>
+        <a href="https://github.com/Ankitchaudhary2504" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <i class="fab fa-github"></i> GitHub Profile
+        </a>
+      </div>
 
       <!-- Animated Terminal -->
       <div class="terminal-container">
@@ -510,6 +529,35 @@
       </div>
     </main>
 
+    <!-- Architecture & Engineering Showcase -->
+    <section class="architecture-section">
+      <h2 class="apps-header">Engineering Standards</h2>
+      <p class="section-subtitle">How I build high-scalability, 60 FPS mobile applications</p>
+      
+      <div class="arch-grid">
+        <div class="arch-card">
+          <div class="arch-icon"><i class="fas fa-cubes"></i></div>
+          <h3>Clean Architecture</h3>
+          <p>Separation of concerns using Domain, Data, and Presentation layers ensuring testability & modular maintainability.</p>
+        </div>
+        <div class="arch-card">
+          <div class="arch-icon"><i class="fas fa-bolt"></i></div>
+          <h3>State Management</h3>
+          <p>Predictable state flow with Bloc, Riverpod & Provider for zero unnecessary rebuilds and smooth 60 FPS UI rendering.</p>
+        </div>
+        <div class="arch-card">
+          <div class="arch-icon"><i class="fas fa-database"></i></div>
+          <h3>Offline-First DB</h3>
+          <p>Robust SQLite, Hive, and Supabase local syncing for lightning-fast application launch times and offline reliability.</p>
+        </div>
+        <div class="arch-card">
+          <div class="arch-icon"><i class="fas fa-rocket"></i></div>
+          <h3>CI/CD & Store Release</h3>
+          <p>Automated build pipelines, Fastlane integration, and Google Play Store / Apple App Store compliance management.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Kiddo Learn Character Universe Section -->
     <section class="kiddo-universe-section">
       <h2 class="apps-header"
@@ -609,7 +657,7 @@
     </section>
 
     <!-- Contact Form Section -->
-    <section class="contact-section">
+    <section class="contact-section" id="contact">
       <h2 class="apps-header">Get In Touch</h2>
       <form class="glass-form" action="mailto:ankitch2504@gmail.com" method="post" enctype="text/plain">
         <div class="input-group">
@@ -633,12 +681,19 @@
     <!-- Footer -->
     <footer>
       <div class="footer-socials">
+        <a href="https://github.com/Ankitchaudhary2504" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
         <a href="mailto:ankitch2504@gmail.com" class="social-link" title="Email Me"><i class="fas fa-envelope"></i></a>
       </div>
       <p class="footer-copy">&copy; 2026 Ankit Chaudhary &bull; Crafted with precision & innovation.</p>
     </footer>
 
   </div>
+
+  <!-- Quick Action Floating Widget -->
+  <a href="mailto:ankitch2504@gmail.com?subject=Inquiry%20from%20Portfolio%20Website" class="floating-contact-btn" title="Quick Contact">
+    <i class="fas fa-comments"></i>
+    <span>Hire Me</span>
+  </a>
 
   <!-- Quick View App Modal Dialog -->
   <div class="modal-overlay" id="app-modal" aria-hidden="true">

@@ -498,6 +498,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Hide Preloader on Load
 window.addEventListener('load', () => {
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('Service Worker Registered:', reg.scope))
+            .catch(err => console.log('Service Worker Registration Failed:', err));
+    }
+
     const preloader = document.getElementById('preloader');
     if (preloader) {
         setTimeout(() => {
