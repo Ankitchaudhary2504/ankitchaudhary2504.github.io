@@ -129,8 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const height = rect.height;
             const xPercent = (e.clientX - rect.left) / width - 0.5;
             const yPercent = (e.clientY - rect.top) / height - 0.5;
-            const rotateX = -yPercent * 25; 
-            const rotateY = xPercent * 25;  
+            const rotateX = -yPercent * 25;
+            const rotateY = xPercent * 25;
             card.style.setProperty('--rotate-x', `${rotateX}deg`);
             card.style.setProperty('--rotate-y', `${rotateY}deg`);
         });
@@ -169,10 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rect = hoveredElement.getBoundingClientRect();
                 const targetX = rect.left + rect.width / 2;
                 const targetY = rect.top + rect.height / 2;
-                
+
                 cursorX += (targetX - cursorX) * 0.25;
                 cursorY += (targetY - cursorY) * 0.25;
-                
+
                 if (cursorOutline) {
                     cursorOutline.style.left = `${cursorX}px`;
                     cursorOutline.style.top = `${cursorY}px`;
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 cursorX += (mouseX - cursorX) * 0.18;
                 cursorY += (mouseY - cursorY) * 0.18;
-                
+
                 if (cursorOutline) {
                     cursorOutline.style.left = `${cursorX}px`;
                     cursorOutline.style.top = `${cursorY}px`;
