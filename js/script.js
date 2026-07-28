@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. Spotlight Mouse Hover Glow & 3D Tilt
     const bindSpotlight = () => {
-        const spotlightCards = document.querySelectorAll('.app-card, .stat-card, .review-card, .kiddo-card');
+        const spotlightCards = document.querySelectorAll('.app-card, .stat-card, .review-card');
         spotlightCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
@@ -118,27 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     bindSpotlight();
-
-    // 4.1 Kiddo Learn Universe 3D Tilt Effect
-    const kiddoCards = document.querySelectorAll('.kiddo-card');
-    kiddoCards.forEach(card => {
-        card.style.transformStyle = 'preserve-3d';
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const width = rect.width;
-            const height = rect.height;
-            const xPercent = (e.clientX - rect.left) / width - 0.5;
-            const yPercent = (e.clientY - rect.top) / height - 0.5;
-            const rotateX = -yPercent * 25;
-            const rotateY = xPercent * 25;
-            card.style.setProperty('--rotate-x', `${rotateX}deg`);
-            card.style.setProperty('--rotate-y', `${rotateY}deg`);
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.setProperty('--rotate-x', '0deg');
-            card.style.setProperty('--rotate-y', '0deg');
-        });
-    });
 
     // 5. Magnetic Custom Cursor
     const cursorDot = document.querySelector('[data-cursor-dot]');
